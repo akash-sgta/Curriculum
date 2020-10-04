@@ -2,7 +2,8 @@
 Most of the computational topics in BTech Computer Science, transformed into source codes of different languages.
 
 ## Python Contributers-
-### 1. akash-sgta
+### akash-sgta, 
 ## Java Contributers-
+### akash-sgta, 
 ## C Contributers-
 ## Bash Contributers-

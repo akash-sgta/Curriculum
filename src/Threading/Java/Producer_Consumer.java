@@ -65,7 +65,7 @@ class Consumer extends Thread{
 }
 
 public class Producer_Consumer{
-    int product = 0;
+
     public static void main(String[] args)throws Exception{
         Product product_ref = new Product();
         Producer producer_ref = new Producer(product_ref, "Producer");
@@ -75,7 +75,13 @@ public class Producer_Consumer{
 
         producer_ref.start();
         consumer_ref.start();
-
+        /*
+        In case of implements Runnable;
+        Eg:
+        Producer p_ref = new Producer(...);  implements Runnable
+        Thread t = new Thread(p_ref); other wise it would be a part of main thread
+        t.start();
+        */
         producer_ref.join();
         consumer_ref.join();
 
