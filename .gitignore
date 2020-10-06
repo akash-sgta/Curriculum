@@ -9,6 +9,7 @@
 # C
 *.obj
 *.o
+*.out
 
 # Executable
 *.exe

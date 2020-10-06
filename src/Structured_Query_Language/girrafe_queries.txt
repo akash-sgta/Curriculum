@@ -1,0 +1,116 @@
+-------------------------------------------------------------------------
+Q.	All employees::
+select * from employee;
+Q.	All employees order by sal::
+select *
+from employee
+order by salary desc;
+Q.	All employees ordered by sex, then name::
+select *
+from employee
+order by sex asc, first_name asc;
+Q.	Find first 5 employees::
+select first_name as Name
+from employee
+limit 5;
+Q.	find out all the different genders::
+select distinct(sex)
+from employee;
+-----------------------------------------------------------------------
+Q.	Find the number of employees
+select count(emp_id)
+from employee
+where salary > 100000;
+Q.	Find distinct super visors
+select count(distinct(super_id))
+from employee;
+Q.	Get average salary of male
+select avg(salary)
+from employee
+where sex = "M";
+Q.	Sum of all employee salary
+select sum(salary)
+from employee;
+Q.	Find out how many males and how many females there are?
+select sex, count(sex)
+from employee
+group by sex;
+Q.	Find total_sales per salesman
+select first_name, last_name, tot
+from employee, 
+(select emp_id, sum(total_sales) as tot
+from works_with
+group by emp_id) as p
+where employee.emp_id=p.emp_id;
+-----------------------------------------------------------------------
+Q.	Find any clients who are an LLC
+select *
+from client
+where client_name like '%LLC%';
+Q.	Employees birth in october
+select *
+from employee
+where birth_day like '____-10%';
+-----------------------------------------------------------------------
+Q.	Find list of employee and branch names
+select employee.first_name
+from employee
+union
+select branch.branch_name
+from branch;
+Q.	Total money spent or earned by a company
+select e.earn-s.spent
+from
+(select sum(salary) as spent
+from employee) as s,
+(select sum(total_sales) as earn
+from works_with) as e;
+-----------------------------------------------------------------------
+Q.	Find all branches and the names of their managers
+select employee.emp_id, employee.first_name, branch.branch_name, branch.mgr_start_date
+from employee
+join branch
+on employee.emp_id = branch.mgr_id;
+Q.	Left join
+select employee.emp_id, employee.first_name, branch.branch_name, branch.mgr_start_date
+from employee
+left join branch
+on employee.emp_id = branch.mgr_id;
+-----------------------------------------------------------------------
+Q.	Find names of all employees  who sold more than 30000 to a single client
+select first_name
+from employee
+where emp_id
+in
+(select emp_id
+from works_with
+where total_sales > 30000);
+Q.	Find all clients who are handeled by the branch that Michael Scott manages
+select client_name
+from client
+where branch_id = (select branch_id
+from branch
+where mgr_id = (select emp_id
+from employee
+where first_name = "Michael" and last_name = "Scott"
+limit 1)
+limit 1);
+-----------------------------------------------------------------------
+Q.	Give a 5% increment to employees in branch_name Stamford
+update employee
+set salary = salary*1.05
+where branch_id = (select branch_id
+from branch
+where branch_name = "Stamford"
+limit 1);
+Q.	Delete branch 2
+delete
+from branch
+where branch_id = 2;
+Q.	Add middle name column in employees
+alter table employee
+add middle_name varchar(32);
+Q.	Drop column middle_name in employees
+alter table employee
+drop middle_name;
+-----------------------------------------------------------------------
