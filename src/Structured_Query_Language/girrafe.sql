@@ -1,6 +1,6 @@
 create database giraffe;
 
-connect giraffe;
+ -- connect giraffe;
 
 create table student(
 	s_id int primary key not null auto_increment,

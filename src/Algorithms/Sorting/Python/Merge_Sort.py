@@ -1,10 +1,22 @@
 class MergeSort(object):
 
-    def __init__(self, array_, size_):
-        self.array = array_
-        self.size = size_
+    def __init__(self, array):
+        self._array = array
+        self._size = len(array)
+    
+    @property
+    def array(self):
+        return self._array
+    @array.setter
+    def array(self, val):
+        self._array = val
+
+    @property
+    def size(self):
+        return self._size
 
     def __merge_sort(self, array):
+
         if len(array) > 1:
             middle = len(array) // 2
             left_array = array[:middle]
@@ -33,10 +45,21 @@ class MergeSort(object):
                 array[k] = right_array[j]
                 k += 1
                 j += 1
+        
+        return True
 
     def sort(self):
         self.__merge_sort(self.array)
         return self.array
-'''
-m = MergeSort([9,1,8,2,7,3,6,4,5], 9)
-print(m.sort())'''
+
+def main():
+    array = [9,1,8,2,7,3,6,4,5]
+    m = MergeSort(array)
+    print(m.sort())
+    array = [1,2,3,4,5,6,7,8,9]
+    m = MergeSort(array)
+    print(m.sort())
+
+main()
+
+# O(nlogn) - O(nlogn) - O(nlogn)

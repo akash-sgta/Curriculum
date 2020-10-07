@@ -1,6 +1,3 @@
-import sys
-MAXINT = sys.maxsize
-
 class Process(object):
 
 	def __init__(self, p_id=None, burst_time=None, arrival_time=None):
@@ -77,38 +74,53 @@ def print_process_chart(processes):
 def waiting_time_util(processes, quantum):
 	n = len(processes)
 	remaining_bt = [0 for _ in range(n)]
+	completed_tasks = 0
+	ready_queue = list()
 
 	for i in range(n):
 		remaining_bt[i] = processes[i].burst_time
 	
 	clock_ticks = 0
 
-	while True:
-		check = True
-
+	while completed_tasks < n:
+		
+		rq = len(ready_queue)
+		
 		for i in range(n):
-			if processes[i].arrival_time <= clock_ticks:
-				if remaining_bt[i] > 0:
-					check = False
-
-					if remaining_bt[i] > quantum:
-						clock_ticks += quantum
-						remaining_bt[i] -= quantum
-					else:
-						clock_ticks += remaining_bt[i]
-						processes[i].completion_time = clock_ticks
-						processes[i].waiting_time = (processes[i].completion_time
-													- processes[i].burst_time
-													- processes[i].arrival_time)
-						if processes[i].waiting_time < 0:
-							processes[i].waiting_time = 0
-
-						remaining_bt[i] = 0
+			if (processes[i].arrival_time <= clock_ticks
+			and remaining_bt[i] > 0):
+				if i not in ready_queue:
+					ready_queue.append(i)
 		
-		clock_ticks += 1
-		
-		if check == True:
-			break
+		for i in range(rq):
+			front = ready_queue.pop(0)
+			if front not in ready_queue:
+				ready_queue.append(front)
+
+		if len(ready_queue) == 0:
+			clock_ticks += 1
+		else:
+			rq = len(ready_queue)
+			for i in range(rq):
+				j = ready_queue[i]
+				if remaining_bt[j] > quantum:
+					clock_ticks += quantum
+					remaining_bt[j] -= quantum
+					ready_queue.append(j)
+				else:
+					clock_ticks += remaining_bt[j]
+					remaining_bt[j] = 0
+
+					processes[j].completion_time = clock_ticks
+					processes[j].waiting_time = (processes[j].completion_time
+												- processes[j].arrival_time
+												- processes[j].burst_time)
+					if processes[j].waiting_time < 0:
+						processes[j].waiting_time = 0
+
+					completed_tasks += 1
+
+			ready_queue = ready_queue[rq:]
 
 	return True
 
@@ -129,8 +141,6 @@ def compute(processes, quantum):
 	waiting_time_util(processes, quantum)
 	turn_around_time_util(processes)
 	
-	print_process_chart(processes)
-	
 	wt_sum,tat_sum = 0,0
 	for i in range(n):
 		wt_sum += processes[i].waiting_time
@@ -147,8 +157,10 @@ def main():
 	array_of_process.append(Process('P3', 2, 0))
 	array_of_process.append(Process('P4', 1, 5))
 	array_of_process.append(Process('P5', 2, 4))
+	# print_process_chart(array_of_process)
 
 	a_tat, a_wt = compute(array_of_process, 1)
+	print_process_chart(array_of_process)
 	print(f"Average Turnaround Time : {a_tat}")
 	print(f"Average Waiting Time : {a_wt}")
 
