@@ -8,4 +8,8 @@ Most of the computational topics in BTech Computer Science, transformed into sou
 ## Cpp Contributers-
 ### akash-sgta, 
 ## C Contributers-
+### akash-sgta, 
 ## Bash Contributers-
+
+any changes to source codes are appreciated
+Thank You.
