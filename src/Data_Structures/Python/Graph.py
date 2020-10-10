@@ -180,7 +180,7 @@ class Graph_Weighted(Graph):
 				node_set.remove(u)
 				node_set.remove(v)
 				node_set.append(set(set(u)|set(v)))
-			# print(node_set)
+
 			if len(list(node_set[0])) == self.nodes:
 				break
 		return order_of_addition, weight
@@ -225,12 +225,12 @@ class Graph_Weighted(Graph):
 		
 def main():
 	
-	# graph = Graph_Unweighted(9)
-	# edges = ((0,1),(0,7), (1,2),(1,7), (2,1),(2,3),(2,5),(2,8), (3,2),(3,4),(3,5), (4,3),(4,5), (5,2),(5,3),(5,4),(5,6), (6,5),(6,7),(6,8), (7,0),(7,1),(7,6),(7,8), (8,2),(8,6),(8,7))
-	# graph.set_edge(edges)
-	# print(graph)
-	# print(graph.traversal_bfs())
-	# print(graph.traversal_dfs())
+	graph = Graph_Unweighted(9)
+	edges = ((0,1),(0,7), (1,2),(1,7), (2,1),(2,3),(2,5),(2,8), (3,2),(3,4),(3,5), (4,3),(4,5), (5,2),(5,3),(5,4),(5,6), (6,5),(6,7),(6,8), (7,0),(7,1),(7,6),(7,8), (8,2),(8,6),(8,7))
+	graph.set_edge(edges)
+	print(graph)
+	print(graph.traversal_bfs())
+	print(graph.traversal_dfs())
 
 	graph = Graph_Weighted(9)
 	edges = ((0,1,4),(0,7,8), (1,0,4),(1,2,8),(1,7,11), (2,1,8),(2,3,7),(2,5,4),(2,8,2), (3,2,7),(3,4,9),(3,5,14), (4,3,9),(4,5,10), (5,2,4),(5,3,14),(5,4,10),(5,6,2), (6,5,2),(6,7,1),(6,8,6), (7,0,8),(7,1,11),(7,6,1),(7,8,7), (8,2,2),(8,6,6),(8,7,7))
@@ -243,4 +243,4 @@ def main():
 	print(graph.shortest_path_dijkstra(7,3))
 	# https://www.geeksforgeeks.org/wp-content/uploads/Fig-11.jpg
 
-# main()
+main()
