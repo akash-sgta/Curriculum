@@ -2,16 +2,13 @@ from my_list import List
 
 def merge(self, l, mid, h):
 
-    print("in")
-    left_array = self[l:mid]
+    left_array = self[l:mid+1]
     n = len(left_array)
-    right_array = self[mid:h]
+    right_array = self[mid+1:h+1]
     m = len(right_array)
 
-    print(left_array, right_array)
-    input()
-
-    i=j=k=0
+    i=j=0
+    k=l
 
     while i < n and j < m:
         if left_array[i] < right_array[j]:
@@ -36,24 +33,24 @@ def merge_sort(self, l, h):
 
     if l < h:
         middle = l + (h-l)//2
-        print(l, h)
-        input()
+        
         self.sort(l, middle)
-        self.sort(middle, h)
+        self.sort(middle+1, h)
 
         self.util(l, middle, h)
 
-    return True
 
 def main():
     List.sort = merge_sort
     List.util = merge
 
     array = List(9,1,8,2,7,3,6,4,5)
-    print(array.sort(0, len(array)))
+    n = len(array)
+    print(array.sort(0, n-1))
     print(array)
     array = List(1,2,3,4,5,6,7,8,9)
-    print(array.sort(0, len(array)))
+    n = len(array)
+    print(array.sort(0, n-1))
     print(array)
 
 main()
