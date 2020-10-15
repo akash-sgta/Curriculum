@@ -1,0 +1,14 @@
+TikTakToe
+Problem Space
+    Water Jug
+Search Algorithms
+    Informed
+        Best First Search
+        A star
+    Uninformed
+        BFS
+        DFS
+        Iterative depth
+        Depth Blocked
+8 Puzzle - Best First Search
+8 Puzzle - A star

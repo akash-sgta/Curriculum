@@ -1,0 +1,4 @@
+First Come First Serve
+Round Robin
+Shortest Job First
+Shortest Remaining Time First

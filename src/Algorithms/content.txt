@@ -1,0 +1,20 @@
+Divide and conquer
+    Binary Search
+    Max and Min
+    Merge Sort
+    Multiplication of two large numbers
+    Quick Sort
+Dynamic Programming
+    Chain Multiplication
+Heap
+    Heap Sort
+Pattern Matching
+    Knuth Morris Patterson
+    Z
+Sorting
+    Bubble
+    Heap
+    Insertion
+    Merge
+    Quick
+    Selection
