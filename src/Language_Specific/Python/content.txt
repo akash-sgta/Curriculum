@@ -1,1 +1,4 @@
 Generator
+Web Scraping
+    - BeautifulSoup
+    - Requests
